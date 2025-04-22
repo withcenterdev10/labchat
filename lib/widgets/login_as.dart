@@ -31,7 +31,7 @@ class LoginAs extends StatelessWidget {
         ),
         ElevatedButton(
           onPressed: () {
-            context.push(ChatRoomScreen.routeName);
+            context.push(ChatRoomScreen.routeName, extra: name.toLowerCase());
           },
           child: Text('Chat'),
         ),

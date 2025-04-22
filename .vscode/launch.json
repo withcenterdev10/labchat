@@ -13,6 +13,14 @@
             "program": "lib/main.dart",
         },
         {
+            "name": "labchat - iPhone 16e",
+            "request": "launch",
+            "type": "dart",
+            "deviceId": "iPhone 16e",
+            "flutterMode": "debug",
+            "program": "lib/main.dart",
+        },
+        {
             "name": "labchat (profile mode)",
             "request": "launch",
             "type": "dart",

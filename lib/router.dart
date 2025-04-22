@@ -40,7 +40,8 @@ final router = GoRouter(
     GoRoute(
       path: ChatRoomScreen.routeName,
       name: ChatRoomScreen.routeName,
-      builder: (context, state) => const ChatRoomScreen(),
+      builder:
+          (context, state) => ChatRoomScreen(roomId: state.extra as String),
     ),
   ],
 );

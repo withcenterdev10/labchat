@@ -137,6 +137,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.6+11"
+  firebase_ui_database:
+    dependency: "direct main"
+    description:
+      name: firebase_ui_database
+      sha256: "8e67ded9d36bb7287dbf65e7b43af00e8558e073aabe19add3c04686896db7ca"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.5.1"
+  firebase_ui_localizations:
+    dependency: transitive
+    description:
+      name: firebase_ui_localizations
+      sha256: "01c0c872ce08d16d217490af3438c97c4fcf1187e856dd2525f892178782fc46"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.13.1"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -150,6 +166,11 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.0.0"
+  flutter_localizations:
+    dependency: transitive
+    description: flutter
+    source: sdk
+    version: "0.0.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -176,6 +197,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.2"
+  intl:
+    dependency: transitive
+    description:
+      name: intl
+      sha256: d6f56758b7d3014a48af9701c085700aac781a92a87a62b1333b46d8879661cf
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.19.0"
   leak_tracker:
     dependency: transitive
     description:
