@@ -29,19 +29,55 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
               query: FirebaseDatabase.instance.ref('lab-chat/$roomId'),
               itemBuilder: (_, snapshot) {
                 final data = snapshot.value as Map;
-                return ListTile(
-                  title: Text(data['text']),
-                  subtitle: Text(
-                    data['sender_uid'],
-                    style: TextStyle(color: Colors.blue, fontSize: 18),
-                  ),
-                  trailing: Text(
-                    DateTime.fromMillisecondsSinceEpoch(
-                      data['created_at'],
-                    ).toString(),
-                  ),
+                // Check if current user variables
+                final currentUid = FirebaseAuth.instance.currentUser!.uid;
+                final isMe = data['sender_uid'] == currentUid;
+
+                return Row(
+                  mainAxisAlignment:
+                      isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.symmetric(
+                        vertical: 6,
+                        horizontal: 12,
+                      ),
+                      padding: const EdgeInsets.all(12),
+                      constraints: BoxConstraints(
+                        maxWidth: MediaQuery.of(context).size.width * 0.7,
+                      ),
+
+                      decoration: BoxDecoration(
+                        color: isMe ? Colors.blue[300] : Colors.green[300],
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: Column(
+                        crossAxisAlignment:
+                            isMe
+                                ? CrossAxisAlignment.end
+                                : CrossAxisAlignment.start,
+                        children: [
+                          Text(data['text']),
+                          Text(data['sender_uid']),
+                        ],
+                      ),
+                    ),
+                  ],
                 );
               },
+              //   return ListTile(
+              //     title: Text(data['text']),
+              //     subtitle: Text(
+              //       data['sender_uid'],
+              //       style: TextStyle(color: Colors.blue, fontSize: 18),
+              //     ),
+              //     trailing: Text(
+              //       DateTime.fromMillisecondsSinceEpoch(
+              //         data['created_at'],
+              //       ).toString(),
+              //     ),
+              //   );
+              // },
             ),
           ),
 
