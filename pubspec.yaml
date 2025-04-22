@@ -18,6 +18,8 @@ dependencies:
   firebase_database: ^11.3.5
   go_router: ^15.1.0
   firebase_ui_database: ^1.5.1
+  easy_design_system: ^0.0.29
+  easy_locale: ^0.0.12
 
 dev_dependencies:
   flutter_test:

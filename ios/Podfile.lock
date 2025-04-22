@@ -1,4 +1,6 @@
 PODS:
+  - devicelocale (0.0.1):
+    - Flutter
   - Firebase/Auth (11.10.0):
     - Firebase/CoreOnly
     - FirebaseAuth (~> 11.10.0)
@@ -74,6 +76,7 @@ PODS:
   - RecaptchaInterop (101.0.0)
 
 DEPENDENCIES:
+  - devicelocale (from `.symlinks/plugins/devicelocale/ios`)
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - firebase_database (from `.symlinks/plugins/firebase_database/ios`)
@@ -96,6 +99,8 @@ SPEC REPOS:
     - RecaptchaInterop
 
 EXTERNAL SOURCES:
+  devicelocale:
+    :path: ".symlinks/plugins/devicelocale/ios"
   firebase_auth:
     :path: ".symlinks/plugins/firebase_auth/ios"
   firebase_core:
@@ -106,6 +111,7 @@ EXTERNAL SOURCES:
     :path: Flutter
 
 SPEC CHECKSUMS:
+  devicelocale: bd64aa714485a8afdaded0892c1e7d5b7f680cf8
   Firebase: 1fe1c0a7d9aaea32efe01fbea5f0ebd8d70e53a2
   firebase_auth: 34c515a8fa76a4ef678ac5ad5cfa3bb3120f5ab5
   firebase_core: 2d4534e7b489907dcede540c835b48981d890943

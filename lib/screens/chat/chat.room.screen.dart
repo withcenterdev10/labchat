@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:easy_locale/easy_locale.dart';
 import 'package:firebase_ui_database/firebase_ui_database.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -29,16 +30,35 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
               query: FirebaseDatabase.instance.ref('lab-chat/$roomId'),
               itemBuilder: (_, snapshot) {
                 final data = snapshot.value as Map;
-                return ListTile(
-                  title: Text(data['text']),
-                  subtitle: Text(
-                    data['sender_uid'],
-                    style: TextStyle(color: Colors.blue, fontSize: 18),
-                  ),
-                  trailing: Text(
-                    DateTime.fromMillisecondsSinceEpoch(
-                      data['created_at'],
-                    ).toString(),
+                final isCurrentUser =
+                    data['sender_uid'] ==
+                    FirebaseAuth.instance.currentUser!.uid;
+                return Align(
+                  alignment:
+                      isCurrentUser
+                          ? Alignment.centerRight
+                          : Alignment.centerLeft,
+                  child: Container(
+                    margin: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color:
+                          isCurrentUser ? Colors.blue[100] : Colors.grey[300],
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(data['text'], style: TextStyle(fontSize: 16)),
+                        SizedBox(height: 5),
+                        Text(
+                          DateTime.fromMillisecondsSinceEpoch(
+                            data['created_at'],
+                          ).toString(),
+                          style: TextStyle(fontSize: 12, color: Colors.grey),
+                        ),
+                      ],
+                    ),
                   ),
                 );
               },
@@ -53,13 +73,13 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
                     controller: textController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: 'Type a message',
+                      labelText: 'Type a message'.t,
                     ),
                     onSubmitted: (v) => sendMessage(v),
                   ),
                 ),
 
-                ElevatedButton(onPressed: sendMessage, child: Text('Send')),
+                ElevatedButton(onPressed: sendMessage, child: Text('Send'.t)),
               ],
             ),
           ),

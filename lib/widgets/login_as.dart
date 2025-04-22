@@ -1,5 +1,5 @@
 import 'dart:developer';
-
+import 'package:easy_locale/easy_locale.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -33,7 +33,7 @@ class LoginAs extends StatelessWidget {
           onPressed: () {
             context.push(ChatRoomScreen.routeName, extra: name.toLowerCase());
           },
-          child: Text('Chat'),
+          child: Text('Chat'.t),
         ),
       ],
     );
