@@ -60,8 +60,22 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
                       ],
                     ),
                   ),
+
                 );
               },
+              //   return ListTile(
+              //     title: Text(data['text']),
+              //     subtitle: Text(
+              //       data['sender_uid'],
+              //       style: TextStyle(color: Colors.blue, fontSize: 18),
+              //     ),
+              //     trailing: Text(
+              //       DateTime.fromMillisecondsSinceEpoch(
+              //         data['created_at'],
+              //       ).toString(),
+              //     ),
+              //   );
+              // },
             ),
           ),
 
