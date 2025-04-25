@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:easy_locale/easy_locale.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_ui_database/firebase_ui_database.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ChatRoomScreen extends StatefulWidget {
   static const String routeName = '/ChatRoom';
@@ -49,6 +53,14 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        (data['image_url'] != null)
+                            ? Image.network(
+                              data['image_url'],
+                              width: 100,
+                              height: 100,
+                            )
+                            : SizedBox(),
+
                         Text(data['text'], style: TextStyle(fontSize: 16)),
                         SizedBox(height: 5),
                         Text(
@@ -60,7 +72,6 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
                       ],
                     ),
                   ),
-
                 );
               },
               //   return ListTile(
@@ -82,6 +93,10 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
           SafeArea(
             child: Row(
               children: [
+                IconButton(
+                  onPressed: () => pickImage(),
+                  icon: Icon(Icons.camera_alt),
+                ),
                 Expanded(
                   child: TextField(
                     controller: textController,
@@ -102,14 +117,39 @@ class _ChatRoomScreenState extends State<ChatRoomScreen> {
     );
   }
 
-  sendMessage([String? v]) async {
+  sendMessage([String? v, File? imageFile]) async {
     final text = textController.text.trim();
-    if (text.isEmpty) return;
+    String? imageUrl;
+
+    if (text.isEmpty && imageFile == null) return;
+
+    if (imageFile != null) {
+      final storageRef = FirebaseStorage.instance
+          .ref('lab-chat/$roomId')
+          .child(DateTime.now().toIso8601String());
+
+      await storageRef.putFile(imageFile);
+
+      imageUrl = await storageRef.getDownloadURL();
+      print("Succesfully uploaded -----> $imageUrl");
+    }
+    print("before checking the");
+
+    print("After");
     textController.clear();
     await FirebaseDatabase.instance.ref('lab-chat/$roomId').push().set({
+      'image_url': imageUrl,
       'text': text,
       'sender_uid': FirebaseAuth.instance.currentUser!.uid,
       'created_at': ServerValue.timestamp,
     });
+  }
+
+  pickImage() async {
+    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (image == null) return;
+    final imagePath = image.path;
+    sendMessage(null, File(imagePath));
+    print(imagePath);
   }
 }

@@ -20,6 +20,8 @@ dependencies:
   firebase_ui_database: ^1.5.1
   easy_design_system: ^0.0.29
   easy_locale: ^0.0.12
+  firebase_storage: ^12.4.5
+  image_picker: ^1.1.2
 
 dev_dependencies:
   flutter_test:
