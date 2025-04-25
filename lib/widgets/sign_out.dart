@@ -1,5 +1,5 @@
 import 'dart:developer';
-
+import 'package:easy_locale/easy_locale.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +17,7 @@ class SignOut extends StatelessWidget {
           log("Error signing out: $e");
         }
       },
-      child: const Text('Sign Out'),
+      child: Text('Sign Out'.t),
     );
   }
 }
